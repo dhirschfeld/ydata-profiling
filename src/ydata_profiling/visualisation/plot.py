@@ -564,7 +564,7 @@ def _plot_timeseries(
         colors = create_comparison_color_list(config)
 
         for serie, color, label in zip(series, colors, labels):
-            serie.plot(color=color, label=label)
+            serie.plot(color=color, label=label, alpha=0.5)
 
     else:
         series.plot(color=config.html.style.primary_colors[0])
@@ -573,14 +573,14 @@ def _plot_timeseries(
 
 
 @manage_matplotlib_context()
-def mini_ts_plot(config: Settings, series: Union[list, pd.Series]) -> str:
+def mini_ts_plot(config: Settings, series: Union[list, pd.Series], figsize=(3, 2.25)) -> str:
     """Plot an time-series plot of the data.
     Args:
       series: The data to plot.
     Returns:
       The resulting timeseries plot encoded as a string.
     """
-    plot = _plot_timeseries(config, series, figsize=(3, 2.25))
+    plot = _plot_timeseries(config, series, figsize=figsize)
     plot.xaxis.set_tick_params(rotation=45)
     plt.rc("ytick", labelsize=3)
 
